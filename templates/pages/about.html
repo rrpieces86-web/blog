@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{%  load static %}
+
+{% block title %}
+    About
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/about.css' %}">
+    <style>
+        p {
+            background-color: darkslategray;
+            font: white;
+        }
+    </style>
+    <script>
+        console.log("internal js on django!")
+    </script>
+{% endblock %}
+
+{% block content %}
+    <h1 style="background-color: darksalmon; letter-spacing: 5px;">About Page using jinja!</h1>
+    <div class="photos">
+        <img src="https://picsum.photos/600/300" alt="Picsum Random Photo!">
+        <img src="{% static 'images/external-img.jpg' %}" alt="internal image">
+    </div>
+    <p class="custom-p">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquid nobis ducimus alias vero impedit recusandae illum nostrum quia, eveniet suscipit tempora maxime, cum a nam, aut distinctio placeat facere velit!</p>
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'js/about/js' %}"></script>
+{% endblock %}

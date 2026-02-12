@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Home Page
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <style>
+        p {
+            background-color: black;
+            font: white;
+        }
+    </style>
+    <script>
+        console.log("internal js")
+    </script>
+{% endblock %}
+
+{% block content %}
+    <h1 style="letter-spacing: 5 px;">Home page using jinja tags!</h1>
+    <div>
+        <img src="{% static 'images/external-img.jpg' %}" alt="internal image">
+    </div>
+    <p class="container section">Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio itaque ab est fuga necessitatibus provident quidem voluptatum illum enim, delectus nostrum, architecto aliquam officiis tempore porro quas, pariatur tempora quibusdam.</p>
+{% endblock %}
