@@ -15,3 +15,5 @@ $$ notes for git
 2 on the terminal (make sure your on the right folder) execute the cammand git init
 3 if you need a gitignore file, make sure to create that file and set up that correctly
 4 add all the files from your project by executing git add -A
+5 save all of those in a single group (it's called commit): git commit -m "title of push"
+6. create the main branch (the space where we are going to store all of the commits): git branch -M main
