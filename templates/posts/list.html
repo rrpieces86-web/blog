@@ -10,6 +10,9 @@
         {% for post in posts %}
         <li>
             <h4>{{ post.title }}</h4>
+            <span>Status: <strong>{{ post.status }}</strong></span>
+            <br>
+            <a href="{% url 'post_detail' post.id %}">Continue reading...</a>
         </li>
         {% endfor %}
     </ul>

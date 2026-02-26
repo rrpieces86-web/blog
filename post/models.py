@@ -19,7 +19,10 @@ class Post(models.Model):
         get_user_model(),
         on_delete=models.CASCADE
     )
-
+    status = models.ForeignKey(
+        Status,
+        on_delete=models.DO_NOTHING
+    )
     def __str__(self):
         return f"{self.title} by {self.author}"
     
