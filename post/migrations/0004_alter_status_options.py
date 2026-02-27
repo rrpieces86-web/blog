@@ -16,9 +16,4 @@ class Migration(migrations.Migration):
             options={'verbose_name_plural': 'Status'},
         ),
     ]
-    migrations.AddField(
-        model_name='post',
-        name='status',
-        field = models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='posts.status'),
-        preserve_default=False
-    )
+
