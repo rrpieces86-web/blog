@@ -4,7 +4,9 @@ from django.views.generic import(
     CreateView,
     DetailView,
     DeleteView,
-    UpdateView
+    UpdateView,
+    
+    
 )
 from .models import Post, Status
 from django.urls import reverse_lazy
@@ -19,6 +21,26 @@ class PostListView(ListView):
     queryset = Post.objects.filter(status=published_status).order_by("created_on")
     context_object_name = "posts"
     # this mehod helps us to use the context howeverr we want ( take a look at it, add elements or anything)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        print(context)
+        return context
+    
+class PostdraftView(ListView):
+    template_name = "posts/draft.html"
+    published_status = Status.objects.get(Name="draft")
+    queryset = Post.objects.filter(status=published_status).order_by("created_on")
+    context_object_name = "posts"
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        print(context)
+        return context
+    
+class PostarchiveView(ListView):
+    template_name = "posts/archive.html"
+    published_status = Status.objects.get(Name="archived")
+    queryset = Post.objects.filter(status=published_status).order_by("created_on")
+    context_object_name = "posts"
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         print(context)

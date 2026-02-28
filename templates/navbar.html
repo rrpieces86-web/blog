@@ -20,6 +20,12 @@
             <a class="nav-link" href="{% url 'post_new' %}">create</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="{% url 'post_draft' %}">drafts</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'post_archive' %}">archives</a>
+          </li>
+          <li class="nav-item">
             <form action="{% url 'logout' %}" method="post">
               {% csrf_token %}
               <input type="submit" value="Logout" class="nav-link">
