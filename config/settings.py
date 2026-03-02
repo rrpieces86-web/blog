@@ -136,4 +136,6 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 ### email backend config###
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+CSRF_COOKIE_SAMESITE = None
+SESSION_COOKIE_SAMESITE = None
 ### SMTP - simple mail transfer protocal ###
