@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.views.generic import(
     ListView,
     CreateView,
@@ -10,6 +9,10 @@ from django.views.generic import(
 )
 from .models import Post, Status
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import (
+    LoginRequiredMixin,
+    UserPassesTestMixin
+)
 
 
 # Create your views here.
@@ -26,7 +29,7 @@ class PostListView(ListView):
         print(context)
         return context
     
-class PostdraftView(ListView):
+class PostdraftView(LoginRequiredMixin,ListView):
     template_name = "posts/draft.html"
     published_status = Status.objects.get(Name="draft")
     queryset = Post.objects.filter(status=published_status).order_by("created_on")
@@ -36,7 +39,7 @@ class PostdraftView(ListView):
         print(context)
         return context
     
-class PostarchiveView(ListView):
+class PostarchiveView(LoginRequiredMixin,ListView):
     template_name = "posts/archive.html"
     published_status = Status.objects.get(Name="archived")
     queryset = Post.objects.filter(status=published_status).order_by("created_on")
@@ -46,7 +49,7 @@ class PostarchiveView(ListView):
         print(context)
         return context
 
-class PostCreateView(CreateView):
+class PostCreateView(LoginRequiredMixin,CreateView):
     template_name = "posts/new.html"
     model = Post
     fields = ["title", "subtitle", "body", "status"]
@@ -56,17 +59,38 @@ class PostCreateView(CreateView):
         return super().form_valid(form)
 
 
-class PostDetailView(DetailView):
+class PostDetailView(LoginRequiredMixin,DetailView):
     template_name = "posts/detail.html"
     model = Post
     context_object_name = "post"
 
-class PostUpdateView(UpdateView):
+class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     template_name = "posts/edit.html"
     model = Post
     fields = ["title", "subtitle", "body", "status"]
 
-class PostDeleteView(DeleteView):
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user.is_authenticated:
+            if self.request.user == post.author:
+                return True
+            else:
+                return False
+        else:
+            return False
+
+class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     template_name = "posts/delete.html"
     model = Post
     success_url = reverse_lazy("post_list")
+
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user.is_authenticated:
+            if self.request.user == post.author:
+                return True
+            else:
+                return False
+        else:
+            return False
+        

@@ -128,8 +128,12 @@ STATICFILES_DIRS = [str(BASE_DIR.joinpath("static"))]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = 'home'
-LOGOUT_REDIRECT_URL = 'login'
+##LOGOUT_REDIRECT_URL = 'login'
 
 ### 'crispy_forms' variables pack####
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+### email backend config###
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+### SMTP - simple mail transfer protocal ###
